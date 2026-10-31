@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products &amp; Materials | Setu Global</title>
+<meta name="description" content="Films, stocklots, post industrial scrap, resins, and reprocessed pellets traded by Setu Global, graded and inspected before every shipment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="logo"><img src="images/logo.png" alt="Setu Global" class="logo-mark"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="products.html" class="active">Products &amp; Materials</a></li>
+      <li><a href="sustainability.html">Sustainability</a></li>
+      <li><a href="founder.html">Founder</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-ghost">Partner With Us</a>
+      <a href="contact.html" class="btn btn-primary">Request a Quote</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="products.html">Products &amp; Materials</a>
+    <a href="sustainability.html">Sustainability</a>
+    <a href="founder.html">Founder</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="contact.html" class="btn btn-primary">Request a Quote</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Products &amp; Materials</span>
+      <h1>Handled across every major polymer category.</h1>
+      <p>Organized by category, graded by specification, inspected before it ships.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+
+      <div class="product-cat">
+        <div class="product-cat-head">
+          <h3>Films &amp; Stocklots</h3>
+          <span class="tag">Category 01</span>
+        </div>
+        <div class="product-items">
+          <div class="product-item">PET Film, Printed <button onclick="openModal('PET Film, Printed')">Inquire →</button></div>
+          <div class="product-item">PET Film, Plain <button onclick="openModal('PET Film, Plain')">Inquire →</button></div>
+          <div class="product-item">PET Film, Metallized <button onclick="openModal('PET Film, Metallized')">Inquire →</button></div>
+          <div class="product-item">BOPP Film <button onclick="openModal('BOPP Film')">Inquire →</button></div>
+          <div class="product-item">Shrink Film <button onclick="openModal('Shrink Film')">Inquire →</button></div>
+          <div class="product-item">Polyester Rolls <button onclick="openModal('Polyester Rolls')">Inquire →</button></div>
+        </div>
+      </div>
+
+      <div class="product-cat">
+        <div class="product-cat-head">
+          <h3>Post-Industrial Scrap &amp; Resins</h3>
+          <span class="tag">Category 02</span>
+        </div>
+        <div class="product-items">
+          <div class="product-item">Polypropylene (PP, raffia grade) <button onclick="openModal('Polypropylene (PP, raffia grade)')">Inquire →</button></div>
+          <div class="product-item">High-Density Polyethylene (HDPE) <button onclick="openModal('HDPE')">Inquire →</button></div>
+          <div class="product-item">Low-Density Polyethylene (LDPE) <button onclick="openModal('LDPE')">Inquire →</button></div>
+          <div class="product-item">EPDM <button onclick="openModal('EPDM')">Inquire →</button></div>
+          <div class="product-item">Nylon (PA6 / PA66) Scrap <button onclick="openModal('Nylon Scrap')">Inquire →</button></div>
+          <div class="product-item">Engineering Polymer Waste <button onclick="openModal('Engineering Polymer Waste')">Inquire →</button></div>
+        </div>
+      </div>
+
+      <div class="product-cat">
+        <div class="product-cat-head">
+          <h3>Material Formats</h3>
+          <span class="tag">Category 03</span>
+        </div>
+        <div class="product-items">
+          <div class="product-item">Baled Scrap <button onclick="openModal('Baled Scrap')">Inquire →</button></div>
+          <div class="product-item">Roll Stocklots <button onclick="openModal('Roll Stocklots')">Inquire →</button></div>
+          <div class="product-item">Regrinds <button onclick="openModal('Regrinds')">Inquire →</button></div>
+          <div class="product-item">Reprocessed Pellets <button onclick="openModal('Reprocessed Pellets')">Inquire →</button></div>
+          <div class="product-item">Agglomerates <button onclick="openModal('Agglomerates')">Inquire →</button></div>
+          <div class="product-item">Flakes <button onclick="openModal('Flakes')">Inquire →</button></div>
+        </div>
+      </div>
+
+      <div class="product-cat">
+        <div class="product-cat-head">
+          <h3>Specialty &amp; Custom Grades</h3>
+          <span class="tag">Category 04</span>
+        </div>
+        <div class="product-items">
+          <div class="product-item">Color Sorted Scrap <button onclick="openModal('Color Sorted Scrap')">Inquire →</button></div>
+          <div class="product-item">Food Grade PET Flakes <button onclick="openModal('Food Grade PET Flakes')">Inquire →</button></div>
+          <div class="product-item">Custom Blended Compounds <button onclick="openModal('Custom Blended Compounds')">Inquire →</button></div>
+          <div class="product-item">Off-Spec / Rejected Batches <button onclick="openModal('Off-Spec Batches')">Inquire →</button></div>
+        </div>
+      </div>
+
+      <div class="offer-sheet-cta">
+        <div>
+          <h3 style="font-size:1.1rem; margin-bottom:0.3rem;">Monthly Inventory / Offer Sheet</h3>
+          <p>Get our current stocklot specifications, quantities, and ex-port terms.</p>
+        </div>
+        <a href="contact.html" class="btn btn-ghost">Request Offer Sheet</a>
+      </div>
+
+      <div class="section-head" style="margin-top: var(--space-xl);">
+        <span class="eyebrow">Quality Standards</span>
+        <h2>Container loading &amp; material quality</h2>
+        <p>Clean warehouse storage, consistent baling, and careful containerized stuffing, built to build trust with every partner.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="images/gallery-baling.jpg" alt="Baling standards"><span>Baling Standards</span></div>
+        <div class="gallery-item"><img src="images/gallery-storage.jpg" alt="Warehouse storage"><span>Warehouse Storage</span></div>
+        <div class="gallery-item"><img src="images/gallery-stuffing.jpg" alt="Container stuffing"><span>Container Stuffing</span></div>
+        <div class="gallery-item"><img src="images/gallery-grading.jpg" alt="Stocklot inspection"><span>Stocklot Inspection</span></div>
+        <div class="gallery-item"><img src="images/gallery-dispatch.jpg" alt="Port dispatch"><span>Port Dispatch</span></div>
+        <div class="gallery-item"><img src="images/gallery-rolls.jpg" alt="Material grading"><span>Material Grading</span></div>
+      </div>
+
+      <div class="bulletin" style="margin-top: var(--space-xl);">
+        <span class="eyebrow">For Regular Buyers</span>
+        <h3>Live Stocklot Bulletin</h3>
+        <p>Request access to view incoming container loads, specifications, and ex-port terms as they become available.</p>
+        <a href="contact.html" class="btn btn-primary">Request Access</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="images/logo.png" alt="Setu Global" class="logo-mark" style="height:44px;"></a>
+        <p>An international facilitator of circular polymer supply chains, bridging scrap, film, and resin between origin and production, container by container.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="about.html">About Us</a>
+          <a href="founder.html">Founder</a>
+          <a href="sustainability.html">Sustainability</a>
+        </div>
+        <div class="footer-col">
+          <h5>Trading</h5>
+          <a href="products.html">Products &amp; Materials</a>
+          <a href="contact.html">Request a Quote</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="mailto:setuglobalexim@gmail.com">setuglobalexim@gmail.com</a>
+          <a href="https://wa.me/917990073517">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Setu Global. All rights reserved.</span>
+      <span>Ahmedabad, India</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/917990073517" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M17.6 6.3A8.9 8.9 0 0 0 12 4a8.9 8.9 0 0 0-7.9 13l-1 3.7 3.8-1a8.9 8.9 0 0 0 4.3 1.1h.1a8.9 8.9 0 0 0 8.9-8.9c0-2.4-.9-4.6-2.6-6.3zM12 19.4h-.1a7.4 7.4 0 0 1-3.8-1l-.3-.1-2.3.6.6-2.2-.2-.3a7.4 7.4 0 1 1 13.7-3.9 7.4 7.4 0 0 1-7.4 6.9zm4-5.5c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1-.1.2-.5.7-.6.8-.1.1-.2.2-.4.1-.2-.1-.8-.3-1.6-1-.6-.5-1-1.2-1.1-1.4-.1-.2 0-.3.1-.4l.3-.4.2-.3c.1-.1 0-.2 0-.3 0-.1-.5-1.2-.7-1.6-.2-.4-.4-.4-.5-.4h-.4c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9 0 1.1.8 2.2.9 2.3.1.2 1.6 2.4 3.8 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1l-.4-.1z"/></svg>
+</a>
+
+<!-- Inquiry Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h3 id="modalTitle">Inquire About This Grade</h3>
+    <p class="modal-sub">Send us your requirement and we'll respond within 24 business hours.</p>
+    <form id="modalForm">
+      <div class="form-group">
+        <label for="modalName">Name</label>
+        <input type="text" id="modalName" required>
+      </div>
+      <div class="form-group">
+        <label for="modalQty">Quantity Needed</label>
+        <input type="text" id="modalQty" placeholder="e.g. 1 x 40ft FCL">
+      </div>
+      <div class="form-group">
+        <label for="modalEmail">Email or WhatsApp</label>
+        <input type="text" id="modalEmail" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send Inquiry</button>
+    </form>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
