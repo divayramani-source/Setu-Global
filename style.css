@@ -172,9 +172,11 @@ header.scrolled { box-shadow: 0 4px 24px rgba(11,37,69,0.06); }
 .logo span { color: var(--accent); }
 
 .logo-mark {
-  height: 42px;
-  width: auto;
+  height: 44px;
+  width: 44px;
   display: block;
+  border-radius: 50%;
+  object-fit: contain;
   filter: drop-shadow(0 3px 8px rgba(26,115,181,0.3));
   animation: logoFloat 3.6s ease-in-out infinite;
 }
