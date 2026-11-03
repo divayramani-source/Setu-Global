@@ -996,3 +996,69 @@ footer {
   z-index: 0;
 }
 .card.spotlight-active::before { opacity: 1; }
+
+/* ---------- Card 3D tilt, paired with the spotlight above ---------- */
+.tilt-card {
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.25s ease;
+  will-change: transform;
+}
+.tilt-card:hover {
+  transition: transform 0.08s linear;
+}
+
+/* ---------- Spinning text badge ---------- */
+.spin-badge {
+  position: relative;
+  width: 118px;
+  height: 118px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spin-badge-ring {
+  position: absolute;
+  inset: 0;
+  animation: spinBadge 14s linear infinite;
+}
+.spin-badge-ring svg {
+  width: 100%;
+  height: 100%;
+}
+.spin-badge-ring text {
+  font-family: 'Inter', sans-serif;
+  font-size: 8.6px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  fill: var(--accent-dim);
+  text-transform: uppercase;
+}
+.spin-badge-core {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(26,115,181,0.35);
+}
+.spin-badge-core svg {
+  width: 22px;
+  height: 22px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+}
+@keyframes spinBadge {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spin-badge-ring { animation: none; }
+}
+@media (max-width: 720px) {
+  .spin-badge { display: none; }
+}

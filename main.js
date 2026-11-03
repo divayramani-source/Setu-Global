@@ -163,20 +163,32 @@ if (header) {
   });
 })();
 
-// Card spotlight cursor glow
+// Card spotlight cursor glow, plus a gentle 3D tilt on the same cards
 (function initCardSpotlight() {
   const cards = document.querySelectorAll('.card');
   if (!cards.length || window.matchMedia('(hover: none)').matches) return;
   cards.forEach((card) => {
+    card.classList.add('tilt-card');
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       card.style.setProperty('--spot-x', x + '%');
       card.style.setProperty('--spot-y', y + '%');
+
+      const midX = rect.width / 2;
+      const midY = rect.height / 2;
+      const rotateY = ((e.clientX - rect.left - midX) / midX) * 6;
+      const rotateX = -((e.clientY - rect.top - midY) / midY) * 6;
+      card.style.setProperty('--tilt-x', rotateX.toFixed(2) + 'deg');
+      card.style.setProperty('--tilt-y', rotateY.toFixed(2) + 'deg');
     });
     card.addEventListener('mouseenter', () => card.classList.add('spotlight-active'));
-    card.addEventListener('mouseleave', () => card.classList.remove('spotlight-active'));
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('spotlight-active');
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
+    });
   });
 })();
 
