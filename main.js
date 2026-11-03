@@ -57,30 +57,52 @@ if (contactForm) {
   });
 }
 
-// Impact counter animation (25,00,000 KG)
-const counterEl = document.getElementById('impactCounter');
-if (counterEl) {
-  let counted = false;
-  const animateCounter = () => {
-    if (counted) return;
-    const rect = counterEl.getBoundingClientRect();
-    if (rect.top > window.innerHeight) return;
-    counted = true;
-    const target = 2500000;
-    const duration = 1800;
+// Generic animated counters: #impactCounter (legacy) and any [data-count-to]
+(function initCounters() {
+  const runCounter = (el, target, suffix, duration) => {
     const start = performance.now();
     function tick(now) {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      counterEl.textContent = Math.floor(eased * target).toLocaleString('en-IN');
+      el.textContent = Math.floor(eased * target).toLocaleString('en-IN') + (progress < 1 ? '' : suffix);
       if (progress < 1) requestAnimationFrame(tick);
-      else counterEl.textContent = target.toLocaleString('en-IN') + '+ KG';
     }
     requestAnimationFrame(tick);
   };
-  window.addEventListener('scroll', animateCounter);
-  animateCounter();
-}
+
+  const targets = [];
+
+  const legacy = document.getElementById('impactCounter');
+  if (legacy) targets.push({ el: legacy, target: 2500000, suffix: '+ KG', duration: 1800 });
+
+  document.querySelectorAll('[data-count-to]').forEach((el) => {
+    targets.push({
+      el,
+      target: parseInt(el.getAttribute('data-count-to'), 10),
+      suffix: el.getAttribute('data-suffix') || '',
+      duration: 1600,
+    });
+  });
+
+  if (!targets.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach((t) => runCounter(t.el, t.target, t.suffix, t.duration));
+    return;
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const match = targets.find((t) => t.el === entry.target);
+      if (entry.isIntersecting && match) {
+        runCounter(match.el, match.target, match.suffix, match.duration);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  targets.forEach((t) => counterObserver.observe(t.el));
+})();
 
 // Header shadow on scroll
 const header = document.querySelector('header');
@@ -96,7 +118,7 @@ if (header) {
     '.section-head, .card, .mission-box, .route-map, .about-grid > div, ' +
     '.product-cat, .gallery-item, .founder-photo, .founder-wrap > div, ' +
     '.bulletin, .callout-strip .card, .impact-counter, .pillar, ' +
-    '.offer-sheet-cta, .contact-wrap > *, .hero-inner > *'
+    '.offer-sheet-cta, .contact-wrap > *'
   );
   autoTargets.forEach((el) => el.classList.add('reveal'));
 
@@ -107,8 +129,11 @@ if (header) {
     });
   });
 
+  // combine auto-targeted elements with any pre-marked in markup (e.g. hero bits)
+  const allRevealEls = new Set([...autoTargets, ...document.querySelectorAll('.reveal')]);
+
   if (!('IntersectionObserver' in window)) {
-    autoTargets.forEach((el) => el.classList.add('in-view'));
+    allRevealEls.forEach((el) => el.classList.add('in-view'));
     return;
   }
 
@@ -121,7 +146,38 @@ if (header) {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  autoTargets.forEach((el) => observer.observe(el));
+  allRevealEls.forEach((el) => observer.observe(el));
+})();
+
+// Hero headline/subhead word-by-word reveal
+(function initWordReveal() {
+  const els = document.querySelectorAll('.word-reveal');
+  els.forEach((el) => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words
+      .map((w, i) => {
+        const delay = (0.1 + i * 0.045).toFixed(3);
+        return `<span class="word-mask"><span class="word-inner" style="animation-delay:${delay}s">${w}</span></span>`;
+      })
+      .join(' ');
+  });
+})();
+
+// Card spotlight cursor glow
+(function initCardSpotlight() {
+  const cards = document.querySelectorAll('.card');
+  if (!cards.length || window.matchMedia('(hover: none)').matches) return;
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--spot-x', x + '%');
+      card.style.setProperty('--spot-y', y + '%');
+    });
+    card.addEventListener('mouseenter', () => card.classList.add('spotlight-active'));
+    card.addEventListener('mouseleave', () => card.classList.remove('spotlight-active'));
+  });
 })();
 
 // Scroll-triggered quick enquiry popup (home page only)
