@@ -54,38 +54,40 @@
   <section style="border-bottom: none;">
     <div class="container">
       <div class="contact-wrap">
-        <form id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" required>
+        <div class="glow-wrap">
+          <form id="contactForm" class="glow-card">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+              </div>
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" required>
+              </div>
             </div>
             <div class="form-group">
-              <label for="company">Company</label>
-              <input type="text" id="company" required>
+              <label for="material">Material Required / Offered</label>
+              <input type="text" id="material" placeholder="e.g. HDPE regrind, PET film rolls">
             </div>
-          </div>
-          <div class="form-group">
-            <label for="material">Material Required / Offered</label>
-            <input type="text" id="material" placeholder="e.g. HDPE regrind, PET film rolls">
-          </div>
-          <div class="form-row">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="quantity">Quantity / Containers</label>
+                <input type="text" id="quantity" placeholder="e.g. 2 x 20ft FCL">
+              </div>
+              <div class="form-group">
+                <label for="port">Port of Delivery / Discharge</label>
+                <input type="text" id="port">
+              </div>
+            </div>
             <div class="form-group">
-              <label for="quantity">Quantity / Containers</label>
-              <input type="text" id="quantity" placeholder="e.g. 2 x 20ft FCL">
+              <label for="message">Message</label>
+              <textarea id="message"></textarea>
             </div>
-            <div class="form-group">
-              <label for="port">Port of Delivery / Discharge</label>
-              <input type="text" id="port">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Send Inquiry</button>
-          <div class="form-success" id="formSuccess">Thank you, your inquiry has been received. Our trading desk will respond within 24 business hours.</div>
-        </form>
+            <button type="submit" class="btn btn-primary">Send Inquiry</button>
+            <div class="form-success" id="formSuccess">Thank you, your inquiry has been received. Our trading desk will respond within 24 business hours.</div>
+          </form>
+        </div>
 
         <div>
           <div class="contact-info-block">
@@ -115,7 +117,7 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" class="logo"><img src="images/logo.png" alt="Setu Global" class="logo-mark" style="height:44px;"></a>
+        <a href="index.html" class="logo"><img src="images/logo.png" alt="Setu Global" class="logo-mark" style="height:58px;"></a>
         <p>An international facilitator of circular polymer supply chains, bridging scrap, film, and resin between origin and production, container by container.</p>
       </div>
       <div class="footer-cols">
