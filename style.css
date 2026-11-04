@@ -1451,3 +1451,27 @@ footer {
   .cap.c6 { opacity: 1 !important; transform: none !important; }
   .reel-progress { transform: scaleX(1); }
 }
+
+/* founder LinkedIn link */
+.founder-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin: 0.2rem 0 1.4rem;
+  font-size: 0.86rem; font-weight: 600; color: var(--accent);
+  text-decoration: none; border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.founder-link svg { width: 17px; height: 17px; fill: currentColor; }
+.founder-link:hover { color: var(--accent-dim); border-color: var(--accent-dim); }
+
+/* nav fit: the tagline is gone from the mark, and the bar is width-capped,
+   so everything has to live inside one row without wrapping or overlapping. */
+.nav { gap: 1rem; }
+.nav .logo { margin-right: 0.4rem; flex-shrink: 0; }
+.nav-links { gap: 1.35rem; flex-wrap: nowrap; min-width: 0; }
+.nav-links a { white-space: nowrap; }
+.nav-cta { flex-shrink: 0; gap: 0.6rem; }
+.nav-cta .btn { white-space: nowrap; padding: 0.62rem 0.95rem; font-size: 0.84rem; }
+@media (max-width: 1150px) and (min-width: 821px) {
+  .nav-links { gap: 1rem; font-size: 0.92rem; }
+  .nav-cta .btn-ghost { display: none; }
+}
