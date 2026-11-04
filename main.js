@@ -229,3 +229,85 @@ if (quickEnquiry) {
     });
   }
 }
+
+// Motion reel: drive the counter, timecode and chapter marker off the SAME
+// clock the CSS keyframes run on, so nothing can drift out of sync.
+(function initReel() {
+  const reel = document.getElementById('reel');
+  if (!reel) return;
+
+  const numEl = document.getElementById('reelNum');
+  const timeEl = document.getElementById('reelTime');
+  const chapEl = document.getElementById('reelChapter');
+  if (!numEl || !timeEl || !chapEl) return;
+
+  const LOOP = 15000;
+  const COUNT_FROM = 10000;   // scene 5 starts
+  const COUNT_TO = 12200;     // number has fully landed
+  const TARGET = 2500000;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    numEl.textContent = TARGET.toLocaleString('en-IN');
+    timeEl.textContent = '00:15 / 00:15';
+    chapEl.textContent = '06 / 06';
+    return;
+  }
+
+  // Read the master animation's own currentTime. Falls back to a wall clock
+  // if the Web Animations API is unavailable.
+  const started = performance.now();
+  const clockTime = () => {
+    const anims = reel.getAnimations ? reel.getAnimations() : [];
+    for (const a of anims) {
+      if (a.animationName === 'reelClock' && typeof a.currentTime === 'number') {
+        return a.currentTime % LOOP;
+      }
+    }
+    if (anims.length && typeof anims[0].currentTime === 'number') {
+      return anims[0].currentTime % LOOP;
+    }
+    return (performance.now() - started) % LOOP;
+  };
+
+  const easeOut = (p) => 1 - Math.pow(1 - p, 3);
+  let lastSec = -1;
+  let lastChap = -1;
+  let lastNum = -1;
+  let running = true;
+
+  // Pause the work (not the CSS) when the reel is off screen.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => { running = e.isIntersecting; });
+    }, { threshold: 0.01 }).observe(reel);
+  }
+
+  function frame() {
+    if (running) {
+      const t = clockTime();
+
+      let value;
+      if (t < COUNT_FROM) value = 0;
+      else if (t >= COUNT_TO) value = TARGET;
+      else value = Math.floor(easeOut((t - COUNT_FROM) / (COUNT_TO - COUNT_FROM)) * TARGET);
+      if (value !== lastNum) {
+        numEl.textContent = value.toLocaleString('en-IN');
+        lastNum = value;
+      }
+
+      const sec = Math.min(15, Math.floor(t / 1000));
+      if (sec !== lastSec) {
+        timeEl.textContent = '00:' + String(sec).padStart(2, '0') + ' / 00:15';
+        lastSec = sec;
+      }
+
+      const chap = Math.min(6, Math.floor(t / 2500) + 1);
+      if (chap !== lastChap) {
+        chapEl.textContent = '0' + chap + ' / 06';
+        lastChap = chap;
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
