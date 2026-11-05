@@ -172,12 +172,12 @@ header.scrolled { box-shadow: 0 4px 24px rgba(11,37,69,0.06); }
 .logo span { color: var(--accent); }
 
 .logo-mark {
-  height: 44px;
-  width: 44px;
+  height: 40px;
+  width: auto;
   display: block;
-  border-radius: 50%;
-  object-fit: contain;
-  filter: drop-shadow(0 3px 8px rgba(26,115,181,0.3));
+  /* no border-radius and no fixed width: the mark is a shield, not a circle,
+     so constraining it to a square was clipping the pointed base. */
+  filter: drop-shadow(0 2px 5px rgba(11,37,69,0.18));
   animation: logoFloat 3.6s ease-in-out infinite;
 }
 
@@ -1325,7 +1325,7 @@ footer {
 
 .reel-top {
   position: absolute; top: 20px; left: 46px; right: 46px;
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: flex-end; align-items: center;
 }
 .reel-live {
   display: inline-flex; align-items: center; gap: 7px;
@@ -1475,3 +1475,106 @@ footer {
   .nav-links { gap: 1rem; font-size: 0.92rem; }
   .nav-cta .btn-ghost { display: none; }
 }
+
+/* ============================================================
+   MOBILE / TABLET CORRECTIONS
+   The desktop nav needs roughly 1000px to sit in one row, but the
+   hamburger only appeared below 680px, so between those widths the
+   links and the quote button squeezed the toggle clean off screen.
+   ============================================================ */
+@media (max-width: 1000px) {
+  .nav { gap: 0.75rem; padding: 0.5rem 1.1rem; }
+  .nav .logo { margin-right: 0; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }          /* both CTAs live in the drawer instead */
+  .nav-toggle { display: flex; flex-shrink: 0; margin-left: auto; }
+  .logo-mark { height: 36px; }
+  .logo-text-block .logo-name { font-size: 0.98rem; }
+}
+
+@media (max-width: 680px) {
+  .container { padding: 0 1.1rem; }
+  .hero { padding: 6rem 0 2.6rem; }   /* must clear the 53px fixed header */
+  .hero h1 { font-size: clamp(1.85rem, 8.2vw, 2.5rem); line-height: 1.16; }
+  .hero .sub { font-size: 0.97rem; }
+  .hero-ctas { gap: 0.7rem; width: 100%; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .spin-badge { display: none; }
+  .hero-stats { margin-top: 0.4rem; }
+  .stats { gap: 1.4rem; }
+  .stat-num { font-size: 1.9rem; }
+
+  /* the reel is the showpiece: keep it readable rather than letterboxed */
+  .reel { border-radius: 10px; }
+  .reel-top { top: 12px; left: 16px; right: 16px; }
+  .reel-bottom { left: 16px; right: 16px; bottom: 26px; }
+  .reel-track { left: 16px; right: 16px; bottom: 15px; }
+  .reel-bracket { width: 10px; height: 10px; }
+  .reel-bracket.tl { top: 8px; left: 8px; }  .reel-bracket.tr { top: 8px; right: 8px; }
+  .reel-bracket.bl { bottom: 8px; left: 8px; } .reel-bracket.br { bottom: 8px; right: 8px; }
+  .cap { font-size: 0.6rem; line-height: 1.3; white-space: normal; }
+  .reel-time { font-size: 0.54rem; }
+  .reel-chapter { font-size: 0.54rem; }
+  .reel-count b { font-size: 2rem; }
+  .reel-count em { font-size: 0.7rem; }
+  .reel-wordmark { transform: translateY(44px); }
+  .reel-wordmark .w { font-size: 1.1rem; }
+  .reel-wordmark small { font-size: 0.5rem; letter-spacing: 0.22em; }
+
+  h2 { font-size: 1.65rem; }
+  .section-head p { font-size: 0.95rem; }
+  .card { padding: 1.3rem; }
+
+  .founder-wrap { grid-template-columns: 1fr; gap: 1.6rem; }
+  .founder-photo img { width: 100%; height: auto; }
+  .founder-points { grid-template-columns: 1fr; }
+
+  .sustain-wrap { grid-template-columns: 1fr; gap: 1.8rem; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 1.8rem; }
+  .product-cat-head { flex-wrap: wrap; gap: 0.4rem; }
+  .offer-sheet-cta { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .offer-sheet-cta .btn { width: 100%; justify-content: center; }
+  .footer-cols { grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  .footer-bottom { flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+
+  /* keep the floating WhatsApp button clear of content and the popup */
+  .wa-float { width: 50px; height: 50px; right: 14px; bottom: 14px; }
+  .wa-float svg { width: 24px; height: 24px; }
+  .quick-enquiry { left: 12px; right: 12px; bottom: 76px; width: auto; max-width: none; }
+}
+
+@media (max-width: 420px) {
+  .footer-cols { grid-template-columns: 1fr; }
+  .reel-wordmark .w { font-size: 0.95rem; }
+  .reel-count b { font-size: 1.7rem; }
+}
+
+/* drawer CTA: .mobile-menu a forced display:block, which killed the button's
+   flex centering and horizontal padding, so the label sat flush left. */
+.mobile-menu .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.85rem 1.1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.mobile-menu .btn:hover { color: #fff; }
+
+/* The drawer was pinned to a hardcoded top:64px while the mobile header is
+   only 53px tall, leaving a strip of hero text showing through the gap.
+   Anchoring it to the header itself keeps it flush at any header height. */
+header { position: fixed; }
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0; right: 0;
+  background: var(--bg-alt);
+  max-height: calc(100vh - 100%);
+  overflow-y: auto;
+}
+/* .mobile-menu a (0,1,1) was out-specifying .btn-primary (0,1,0), so the
+   drawer CTA rendered with link colour instead of white. */
+.mobile-menu .btn-primary,
+.mobile-menu .btn-primary:hover { color: #fff; }
