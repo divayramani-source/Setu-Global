@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://setuglobal.co.in/sitemap.xml
